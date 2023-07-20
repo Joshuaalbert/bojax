@@ -1,0 +1,13 @@
+jax
+jaxlib
+etils
+tensorflow
+tensorflow_probability
+jaxns>=2.2.1
+pydantic
+chex>=0.0.8
+mctx
+pyDOE2
+matplotlib
+mctx
+typing-extensions<4.6.0,>=3.6.6
