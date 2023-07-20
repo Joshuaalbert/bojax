@@ -26,7 +26,7 @@ We don't have documentation yet!
 
 **Notes:**
 
-1. Bojax requires >= Python 3.8.
+1. Bojax requires >= Python 3.9.
 2. It is always highly recommended to use a unique virtual environment for each project.
    To use `miniconda`, have it installed, and run
 
