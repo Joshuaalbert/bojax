@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Literal, List, Dict
+from typing import Literal, List, Dict, Union
 from uuid import uuid4
 
 from pydantic import BaseModel, Field, validator, conint, confloat
@@ -54,7 +54,7 @@ class Trial(BaseModel):
         description='The datetime the param_value was determined.',
         example=current_utc()
     )
-    param_values: Dict[str, FloatValue | IntValue] = Field(
+    param_values: Dict[str, Union[FloatValue, IntValue]] = Field(
         description="The parameter mapping for trial.",
         example={'price': FloatValue(value=1.)}
     )

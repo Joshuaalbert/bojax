@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from uuid import uuid4
 
 import pylab as plt
@@ -107,7 +107,7 @@ def test_bayesian_optimiser():
     class User(BaseModel):
         user_id: str = Field(default_factory=lambda: str(uuid4()))
         trial_id: str
-        observable: float | None = None
+        observable: Union[float, None] = None
         join_dt: float
         churn_dt: float
 
@@ -116,7 +116,7 @@ def test_bayesian_optimiser():
     t = 0.
     T = 200.
     n_per_trial = 10
-    trial: Trial | None = None
+    trial: Union[Trial, None] = None
     new_user_rate = 2
     key = random.PRNGKey(42)
     while t < T:

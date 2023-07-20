@@ -1,6 +1,6 @@
 import inspect
 from datetime import datetime, tzinfo
-from typing import TypeVar, Type, Dict, Any
+from typing import TypeVar, Type, Dict, Any, Union
 
 import numpy as np
 from pyDOE2 import lhs
@@ -66,7 +66,7 @@ def build_example(model: Type[_T]) -> _T:
     return model(**example_from_schema(model))
 
 
-def set_datetime_timezone(dt: datetime, offset: str | tzinfo) -> datetime:
+def set_datetime_timezone(dt: datetime, offset: Union[str, tzinfo]) -> datetime:
     """
     Replaces the datetime object's timezone with one from an offset.
 
