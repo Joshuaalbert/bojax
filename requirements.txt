@@ -10,4 +10,3 @@ mctx
 pyDOE2
 matplotlib
 mctx
-pygraphviz>=1.7
