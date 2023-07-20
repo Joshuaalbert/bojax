@@ -146,5 +146,5 @@ def test_bayesian_optimiser():
                                        objective_measurement=user.observable)
             bo.post_measurement(trial_id=user.trial_id, trial_update=trial_update)
     fig = bo.visualise()
-    fig.show()
+    # fig.show()
     plt.close('all')
