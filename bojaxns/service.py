@@ -7,11 +7,11 @@ from jax._src.random import PRNGKey
 from jaxns.prior import parse_prior, PriorModelType, transform
 from matplotlib import dates as mdates
 
-from bojax.experiment import OptimisationExperiment, NewExperimentRequest, Trial, FloatValue, \
+from bojaxns.experiment import OptimisationExperiment, NewExperimentRequest, Trial, FloatValue, \
     IntValue, TrialUpdate
-from bojax.gaussian_process_formulation.bayesian_optimiser import BayesianOptimiser
-from bojax.parameter_space import build_prior_model, ContinuousPrior, IntegerPrior, CategoricalPrior
-from bojax.utils import latin_hypercube
+from bojaxns.gaussian_process_formulation.bayesian_optimiser import BayesianOptimiser
+from bojaxns.parameter_space import build_prior_model, ContinuousPrior, IntegerPrior, CategoricalPrior
+from bojaxns.utils import latin_hypercube
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

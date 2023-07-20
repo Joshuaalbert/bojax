@@ -8,7 +8,7 @@ from jaxns.special_priors import Categorical
 from jaxns.types import float_type
 from pydantic import BaseModel, Field, validator, confloat
 
-from bojax.utils import build_example
+from bojaxns.utils import build_example
 
 tfpd = tfp.distributions
 

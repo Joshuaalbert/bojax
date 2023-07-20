@@ -5,8 +5,8 @@ import jax
 from jax import numpy as jnp
 from tensorflow_probability.substrates import jax as tfp
 
-from bojax import GaussianProcessData
-from bojax.gaussian_process_formulation.distribution_math import GaussianProcessConditionalPredictive
+from bojaxns import GaussianProcessData
+from bojaxns.gaussian_process_formulation.distribution_math import GaussianProcessConditionalPredictive
 
 
 def test_broadcast_lengthscale():

@@ -4,14 +4,14 @@ from setuptools import find_packages
 from setuptools import setup
 
 setup_requires = []
-with open("requirements.txt", 'r') as fh:
-    for line in fh:
-        setup_requires.append(line)
+# with open("requirements.txt", 'r') as fh:
+#     for line in fh:
+#         setup_requires.append(line)
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-setup(name='bojax',
+setup(name='bojaxns',
       version='1.0.0',
       description='Bayesian Optimisation with JAXNS',
       long_description=long_description,

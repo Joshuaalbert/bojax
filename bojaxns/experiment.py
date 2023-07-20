@@ -4,8 +4,8 @@ from uuid import uuid4
 
 from pydantic import BaseModel, Field, validator, conint, confloat
 
-from bojax.parameter_space import ParameterSpace
-from bojax.utils import current_utc, build_example
+from bojaxns.parameter_space import ParameterSpace
+from bojaxns.utils import current_utc, build_example
 
 __all__ = [
     'FloatValue',

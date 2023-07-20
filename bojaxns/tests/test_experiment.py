@@ -1,10 +1,10 @@
 from jax import numpy as jnp
 
-from bojax.experiment import Trial, FloatValue, IntValue, OptimisationExperiment, \
+from bojaxns.experiment import Trial, FloatValue, IntValue, OptimisationExperiment, \
     TrialUpdate
-from bojax.parameter_space import Parameter, IntegerPrior, CategoricalPrior, ParameterSpace, \
+from bojaxns.parameter_space import Parameter, IntegerPrior, CategoricalPrior, ParameterSpace, \
     ContinuousPrior
-from bojax.utils import current_utc
+from bojaxns.utils import current_utc
 
 
 def test_optimisation_experiment():

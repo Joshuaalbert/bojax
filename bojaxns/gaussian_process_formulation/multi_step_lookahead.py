@@ -8,8 +8,8 @@ import mctx
 from jax import tree_map
 from mctx import PolicyOutput, GumbelMuZeroExtraData, RootFnOutput, RecurrentFn
 
-from bojax.base import MarginalisedConditionalPredictive, MarginalisationData, MarginalisedAcquisitionFunction
-from bojax.gaussian_process_formulation.distribution_math import GaussianProcessData, \
+from bojaxns.base import MarginalisedConditionalPredictive, MarginalisationData, MarginalisedAcquisitionFunction
+from bojaxns.gaussian_process_formulation.distribution_math import GaussianProcessData, \
     GaussianProcessConditionalPredictiveFactory, ExpectedImprovementAcquisitionFactory
 
 

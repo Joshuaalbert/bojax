@@ -9,11 +9,11 @@ from jaxns import Model, TerminationCondition, NestedSamplerResults, Approximate
     UniformSampler, UniDimSliceSampler
 from jaxns.types import float_type
 
-from bojax.base import AbstractAcquisition, MarginalisedAcquisitionFunction, MarginalisationData
-from bojax.experiment import OptimisationExperiment
-from bojax.gaussian_process_formulation.distribution_math import GaussianProcessData, \
+from bojaxns.base import AbstractAcquisition, MarginalisedAcquisitionFunction, MarginalisationData
+from bojaxns.experiment import OptimisationExperiment
+from bojaxns.gaussian_process_formulation.distribution_math import GaussianProcessData, \
     GaussianProcessConditionalPredictiveFactory, ExpectedImprovementAcquisitionFactory, TopTwoAcquisitionFactory
-from bojax.gaussian_process_formulation.multi_step_lookahead import run_multi_lookahead, convert_tree_to_graph
+from bojaxns.gaussian_process_formulation.multi_step_lookahead import run_multi_lookahead, convert_tree_to_graph
 
 tfpb = tfp.bijectors
 

@@ -2,9 +2,9 @@ from jax import vmap, random, numpy as jnp
 from jaxns.prior import transform, parse_prior
 from jaxns.types import float_type
 
-from bojax.parameter_space import IntegerPrior, CategoricalPrior, ParameterSpace, \
+from bojaxns.parameter_space import IntegerPrior, CategoricalPrior, ParameterSpace, \
     Parameter, build_prior_model, ContinuousPrior
-from bojax.utils import build_example
+from bojaxns.utils import build_example
 
 
 def test_serialisation():

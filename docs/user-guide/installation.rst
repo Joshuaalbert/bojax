@@ -14,10 +14,10 @@ Install the stable version with,
 
 .. code-block:: bash
 
-   pip install bojax
+   pip install bojaxns
 
 or the latest release with
 
 .. code-block:: bash
    
-   pip install git+http://github.com/Joshuaalbert/bojax.git
+   pip install git+http://github.com/Joshuaalbert/bojaxns.git
