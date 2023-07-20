@@ -20,7 +20,7 @@ Bojax is:
 
 # Documentation
 
-We don't have documentation yet!
+For examples, check out the [documentation](https://bojax.readthedocs.io/) (still in progress).
 
 # Install
 
