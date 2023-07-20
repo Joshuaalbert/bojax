@@ -4,7 +4,7 @@ from chex import PRNGKey
 from jax import numpy as jnp
 from tensorflow_probability.substrates import jax as tfp
 
-from bojax.gaussian_process_formulation.distribution_math import GaussianProcessConditionalPredictive, \
+from bojaxns.gaussian_process_formulation.distribution_math import GaussianProcessConditionalPredictive, \
     GaussianProcessData, ExpectedImprovementAcquisition
 
 tfpd = tfp.distributions

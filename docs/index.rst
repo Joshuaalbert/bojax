@@ -1,10 +1,12 @@
 .. jaxns documentation master file, created by
    sphinx-quickstart on Sat Aug 13 12:39:28 2022.
 
-Welcome to JAXNS's documentation!
+Welcome to Bojaxns's documentation!
 =================================
 
-Bojax's Mission Statement
+Pronounced bo-jackson's, after my late cat Jackson.
+
+Bojaxns's Mission Statement
 -----------------------
 Our mission is to make advanced Bayesian Optimisation easy.
 
@@ -14,7 +16,7 @@ Our mission is to make advanced Bayesian Optimisation easy.
    :glob:
 
    user-guide/*
-   Change Log <https://github.com/Joshuaalbert/bojax#change-log>
+   Change Log <https://github.com/Joshuaalbert/bojaxns#change-log>
 
 
 .. toctree::
@@ -22,7 +24,7 @@ Our mission is to make advanced Bayesian Optimisation easy.
    :caption: API Reference
    :glob:
 
-   api/jaxns/index
+   api/bojaxns/index
 
 
 .. TOC trees for example notebooks

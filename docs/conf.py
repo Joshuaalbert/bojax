@@ -42,7 +42,7 @@ suppress_warnings = [
 ]
 
 add_module_names = False
-modindex_common_prefix = ["bojax."]  # So module index not all under "J"
+modindex_common_prefix = ["bojaxns."]  # So module index not all under "J"
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -60,7 +60,7 @@ autodoc_typehints = "description"
 
 # -- Options for AutoAPI -----------------------------------------------------
 
-autoapi_dirs = ["../bojax"]
+autoapi_dirs = ["../bojaxns"]
 autoapi_root = "api"  # where to put the generated files relative to root
 autoapi_options =  ["members", "undoc-members", "show-inheritance", 
                     "special-members", "imported-members"]

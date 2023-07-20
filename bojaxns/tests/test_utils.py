@@ -1,6 +1,6 @@
 from jax import numpy as jnp
 
-from bojax.utils import latin_hypercube
+from bojaxns.utils import latin_hypercube
 
 
 def test_latin_hyper_cube():

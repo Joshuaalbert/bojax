@@ -5,9 +5,9 @@ import pylab as plt
 from jax import random, numpy as jnp
 from pydantic import BaseModel, Field
 
-from bojax.experiment import NewExperimentRequest, Trial, TrialUpdate
-from bojax.parameter_space import ParameterSpace, Parameter, ContinuousPrior, IntegerPrior, CategoricalPrior
-from bojax.service import BayesianOptimisation
+from bojaxns.experiment import NewExperimentRequest, Trial, TrialUpdate
+from bojaxns.parameter_space import ParameterSpace, Parameter, ContinuousPrior, IntegerPrior, CategoricalPrior
+from bojaxns.service import BayesianOptimisation
 
 
 def test_bayesian_optimisation():

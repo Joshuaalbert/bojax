@@ -8,7 +8,7 @@ from jaxns.prior import PriorModelType
 from jaxns.types import float_type
 from tensorflow_probability.substrates import jax as tfp
 
-from bojax.base import _assert_rank, _assert_same_leading_dim, ConditionalPredictive, ConditionalPredictiveFactory, \
+from bojaxns.base import _assert_rank, _assert_same_leading_dim, ConditionalPredictive, ConditionalPredictiveFactory, \
     AbstractAcquisition, AcquisitionFactory
 
 tfpd = tfp.distributions
