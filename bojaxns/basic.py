@@ -2,7 +2,6 @@ import inspect
 from typing import Callable, Dict, Any, Type, List, TypeVar
 
 import numpy as np
-import ujson
 from pydantic import BaseModel
 
 
@@ -14,8 +13,6 @@ class SerialisableBaseModel(BaseModel):
     class Config:
         validate_assignment = True
         arbitrary_types_allowed = True
-        json_loads = ujson.loads  # can use because ujson decodes NaN and Infinity
-        json_dumps = ujson.dumps  # (currently not possible because ujson doesn't encode NaN and Infinity like json)
         # json_dumps = lambda *args, **kwargs: json.dumps(*args, **kwargs, separators=(',', ':'))
         json_encoders = {np.ndarray: lambda x: x.tolist()}
 
