@@ -2,7 +2,7 @@ import os.path
 
 import numpy as np
 import tensorflow_probability.substrates.jax as tfp
-from etils.array_types import PRNGKey
+from chex import PRNGKey
 from jax import random, numpy as jnp, vmap
 from jax._src.lax.control_flow import scan
 from jaxns import Model, TerminationCondition, NestedSamplerResults, ApproximateNestedSampler, \

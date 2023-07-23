@@ -1,5 +1,6 @@
 [![Python](https://img.shields.io/pypi/pyversions/bojaxns.svg)](https://badge.fury.io/py/bojaxns)
 [![PyPI](https://badge.fury.io/py/bojaxns.svg)](https://badge.fury.io/py/bojaxns)
+[![Documentation Status](https://readthedocs.org/projects/bojaxns/badge/?version=latest)](https://bojaxns.readthedocs.io/en/latest/?badge=latest)
 
 Main
 Status: ![Workflow name](https://github.com/JoshuaAlbert/bojaxns/actions/workflows/unittests.yml/badge.svg?branch=main)
@@ -54,6 +55,7 @@ pip install -r requirements.txt
 pip install -r requirements-tests.txt
 pip install .
 ```
+
 # Change Log
 
 20 July, 2023 -- Bojaxns 1.0.0 released
