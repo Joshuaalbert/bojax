@@ -8,3 +8,4 @@ chex>=0.0.8
 mctx
 pyDOE2
 matplotlib
+etils
