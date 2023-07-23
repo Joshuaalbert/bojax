@@ -9,3 +9,4 @@ mctx
 pyDOE2
 matplotlib
 etils
+pydantic
