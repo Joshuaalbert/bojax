@@ -1,10 +1,10 @@
 .. jaxns documentation master file, created by
-   sphinx-quickstart on Sat Aug 13 12:39:28 2022.
+sphinx-quickstart on Sat Aug 13 12:39:28 2022.
 
 Welcome to Bojaxns's documentation!
 =================================
 
-Pronounced bo-jackson's, after my late cat Jackson.
+Pronounced "beau-Jackson's", after my late cat Jackson.
 
 Bojaxns's Mission Statement
 -----------------------
