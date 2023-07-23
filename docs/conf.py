@@ -11,7 +11,7 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "bojax"
+project = "bojaxns"
 copyright = "2023, Joshua Albert"
 author = "Joshua Albert"
 release = "2.0.0"
