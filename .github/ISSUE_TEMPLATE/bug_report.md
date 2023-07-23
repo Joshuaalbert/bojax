@@ -27,4 +27,4 @@ Ideally you provide some short code that demonstrates the bug. When this is real
 If applicable, add screenshots to help explain your problem.
 
 **JAXNS version**
-Output of `pip freeze | grep bojax`:
+Output of `pip freeze | grep bojaxns`:

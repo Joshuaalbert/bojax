@@ -97,7 +97,7 @@ class BayesianOptimisation:
             self._experiment.trials[trial.trial_id] = trial
             return trial.trial_id
 
-        # get new trial parameter from bojax
+        # get new trial parameter from bojaxns
         bo = BayesianOptimiser(experiment=self._experiment, beta=beta, S=128)
         # U = bo.choose_next_U_multistep(
         #     key=key,
