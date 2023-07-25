@@ -58,6 +58,8 @@ class GaussianProcessData(NamedTuple):
     Y_var: jnp.ndarray
     sample_size: jnp.ndarray
 
+class NotEnoughData(Exception):
+    pass
 
 def _ensure_gaussian_process_data(data: GaussianProcessData) -> GaussianProcessData:
     data = tree_map(lambda x: jnp.asarray(x, float_type), data)
@@ -65,7 +67,7 @@ def _ensure_gaussian_process_data(data: GaussianProcessData) -> GaussianProcessD
     _assert_rank(1, sample_size=data.sample_size, Y=data.Y, Y_var=data.Y_var)
     _assert_same_leading_dim(*data)
     if data.Y.size < 2:
-        raise ValueError('Need more samples to form mean and variance of data.')
+        raise NotEnoughData('Need more samples to form mean and variance of data.')
     return data
 
 
