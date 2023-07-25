@@ -67,6 +67,18 @@ def test_bayesian_optimisation():
             # plt.show()
             # plt.close('all')
 
+        trial_id = bo_experiment.create_new_trial(
+            key=random.PRNGKey(42),
+            random_explore=True
+        )
+        _ = bo_experiment.get_trial(trial_id=trial_id)
+
+        obj_val = float('nan')
+        bo_experiment.post_measurement(
+            trial_id=trial_id,
+            trial_update=TrialUpdate(ref_id='illegal', objective_measurement=obj_val)
+        )
+
     test_example(2)
 
 
