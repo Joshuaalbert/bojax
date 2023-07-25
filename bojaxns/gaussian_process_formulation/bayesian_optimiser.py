@@ -32,12 +32,29 @@ class BayesianOptimiser:
         Y = []
         Y_var = []
         sample_size = []
+
+        # handle nans ==> illegal value
+        min_val, max_val = np.inf, -np.inf
+        for trial_id, trial in self._experiment.trials.items():
+            for ref_id, trial_update in trial.trial_updates.items():
+                if not np.isfinite(trial_update.objective_measurement):
+                    continue
+                min_val = min(trial_update.objective_measurement, min_val)
+                max_val = max(trial_update.objective_measurement, max_val)
+
+        illegal_value = min_val - 0.1*(max_val - min_val)
+        if not np.isfinite(illegal_value):
+            illegal_value = 0.
+
         for trial_id, trial in self._experiment.trials.items():
             if len(trial.trial_updates) == 0:
                 continue
             samples = []
             for ref_id, trial_update in trial.trial_updates.items():
-                samples.append(trial_update.objective_measurement)
+                if not np.isfinite(trial_update.objective_measurement):
+                    samples.append(illegal_value)
+                else:
+                    samples.append(trial_update.objective_measurement)
             U.append(trial.U_value)
             Y.append(np.mean(samples))
             if len(samples) < 2:
