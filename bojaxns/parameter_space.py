@@ -1,14 +1,19 @@
+from functools import partial
 from typing import Union, Literal, List, Generator, Annotated
 
 import jax.numpy as jnp
 import tensorflow_probability.substrates.jax as tfp
+from chex import PRNGKey
+from jax import random, jit
+from jax._src.lax.control_flow import while_loop
+from pydantic import BaseModel, Field, validator, confloat
+
+from bojaxns.common import FloatValue, IntValue, ParamValues, UValue
+from bojaxns.utils import build_example
 from jaxns import Prior, PriorModelGen
 from jaxns.prior import PriorModelType
 from jaxns.special_priors import Categorical
-from jaxns.types import float_type
-from pydantic import BaseModel, Field, validator, confloat
-
-from bojaxns.utils import build_example
+from jaxns.types import float_type, int_type
 
 tfpd = tfp.distributions
 
@@ -114,6 +119,66 @@ class ParameterSpace(BaseModel):
         return value
 
 
+@partial(jit, static_argnames=['parametrisation'])
+def sample_U_categorical(key: PRNGKey, logits: jnp.ndarray, target_cat: jnp.ndarray,
+                         parametrisation: Literal['cdf', 'gumbel_max']) -> jnp.ndarray:
+    prior = Categorical(parametrisation=parametrisation, logits=logits)
+
+    def _iter(state):
+        (key, U, cat) = state
+        key, sample_key = random.split(key, 2)
+        U = random.uniform(sample_key, shape=(prior.base_ndims,), dtype=float_type)
+        cat = prior.forward(U)
+        cat = cat.reshape(())
+        return (key, U, cat)
+
+    key, sample_key = random.split(key, 2)
+    U = random.uniform(sample_key, shape=(prior.base_ndims,), dtype=float_type)
+    cat = prior.forward(U)
+    if cat.size != 1:
+        raise ValueError(f"Category shape must be flat, got {cat.shape}")
+    cat = cat.reshape(())
+
+    (_, U, _) = while_loop(lambda state: state[2] != target_cat,
+                           _iter,
+                           (key, U, cat))
+    return U.reshape((-1,))
+
+
+def inverse_transform_param(key: PRNGKey, param: Parameter, param_value: Union[FloatValue, IntValue]) -> List[float]:
+    prior = param.prior
+    if isinstance(prior, ContinuousPrior):
+        underlying_dist = tfpd.TruncatedNormal(
+            loc=jnp.asarray(prior.mode, float_type),
+            scale=jnp.asarray(prior.uncert, float_type),
+            low=jnp.asarray(prior.lower, float_type),
+            high=jnp.asarray(prior.upper, float_type)
+        )
+        return underlying_dist.cdf(param_value.value).reshape((-1,)).tolist()
+    elif isinstance(prior, IntegerPrior):
+        underlying_dist = tfpd.Normal(loc=jnp.asarray(prior.mode, float_type),
+                                      scale=jnp.asarray(prior.uncert, float_type))
+        int_options = jnp.arange(prior.lower, prior.upper + 1, dtype=float_type)
+        logits = underlying_dist.log_prob(int_options)
+
+        return sample_U_categorical(key=key, logits=logits, target_cat=jnp.asarray(param_value.value, int_type),
+                                    parametrisation='cdf').tolist()
+    elif isinstance(prior, CategoricalPrior):
+        return sample_U_categorical(key=key, logits=jnp.log(jnp.asarray(prior.probs)),
+                                    target_cat=jnp.asarray(param_value.value, int_type),
+                                    parametrisation='gumbel_max').tolist()
+    else:
+        raise ValueError(f"Invalid prior {prior}")
+
+
+def sample_U_value(key: PRNGKey, param_space: ParameterSpace, param_values: ParamValues) -> UValue:
+    U = []
+    for param in param_space.parameters:
+        key, sample_key = random.split(key, 2)
+        U.extend(inverse_transform_param(key=sample_key, param=param, param_value=param_values[param.name]))
+    return U
+
+
 def translate_parameter(param: Parameter) -> Generator[Prior, jnp.ndarray, jnp.ndarray]:
     prior = param.prior
     if isinstance(prior, ContinuousPrior):
@@ -134,7 +199,9 @@ def translate_parameter(param: Parameter) -> Generator[Prior, jnp.ndarray, jnp.n
         param_value = yield Prior(dist_or_value=param_value_idx + prior.lower, name=param.name)
         return param_value
     elif isinstance(prior, CategoricalPrior):
-        param_value = yield Categorical(parametrisation='gumbel_max', probs=prior.probs, name=param.name)
+        probs = jnp.asarray(prior.probs)
+        probs /= jnp.sum(probs)
+        param_value = yield Categorical(parametrisation='gumbel_max', probs=probs, name=param.name)
         return param_value
     else:
         raise ValueError(f"Invalid prior {prior}")
