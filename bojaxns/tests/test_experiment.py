@@ -1,6 +1,7 @@
 from jax import numpy as jnp
 
-from bojaxns.experiment import Trial, FloatValue, IntValue, OptimisationExperiment, \
+from bojaxns.common import FloatValue, IntValue
+from bojaxns.experiment import Trial, OptimisationExperiment, \
     TrialUpdate
 from bojaxns.parameter_space import Parameter, IntegerPrior, CategoricalPrior, ParameterSpace, \
     ContinuousPrior
