@@ -1,30 +1,19 @@
 from datetime import datetime
-from typing import Literal, List, Dict, Union
+from typing import Dict
 from uuid import uuid4
 
-from pydantic import BaseModel, Field, validator, conint, confloat
+from pydantic import BaseModel, Field, validator, conint
 
+from bojaxns.common import FloatValue, ParamValues, UValue
 from bojaxns.parameter_space import ParameterSpace
 from bojaxns.utils import current_utc, build_example
 
 __all__ = [
-    'FloatValue',
-    'IntValue',
     'Trial',
     'TrialUpdate',
     'OptimisationExperiment',
     'NewExperimentRequest',
 ]
-
-
-class FloatValue(BaseModel):
-    type: Literal['float'] = 'float'
-    value: float
-
-
-class IntValue(BaseModel):
-    type: Literal['int'] = 'int'
-    value: int
 
 
 class TrialUpdate(BaseModel):
@@ -54,11 +43,11 @@ class Trial(BaseModel):
         description='The datetime the param_value was determined.',
         example=current_utc()
     )
-    param_values: Dict[str, Union[FloatValue, IntValue]] = Field(
+    param_values: ParamValues = Field(
         description="The parameter mapping for trial.",
         example={'price': FloatValue(value=1.)}
     )
-    U_value: List[confloat(ge=0., le=1.)] = Field(
+    U_value: UValue = Field(
         description="The U-space value of parameters.",
         example=[0.2]
     )

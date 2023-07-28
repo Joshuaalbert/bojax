@@ -7,10 +7,10 @@ from jax._src.random import PRNGKey
 from jaxns.prior import parse_prior, PriorModelType, transform
 from matplotlib import dates as mdates
 
-from bojaxns.experiment import OptimisationExperiment, NewExperimentRequest, Trial, FloatValue, \
-    IntValue, TrialUpdate
+from bojaxns.common import FloatValue, IntValue, ParamValues
+from bojaxns.experiment import OptimisationExperiment, NewExperimentRequest, Trial, TrialUpdate
 from bojaxns.gaussian_process_formulation.bayesian_optimiser import BayesianOptimiser
-from bojaxns.parameter_space import build_prior_model, ContinuousPrior, IntegerPrior, CategoricalPrior
+from bojaxns.parameter_space import build_prior_model, ContinuousPrior, IntegerPrior, CategoricalPrior, sample_U_value
 from bojaxns.utils import latin_hypercube
 
 logging.basicConfig(level=logging.INFO)
@@ -75,6 +75,12 @@ class BayesianOptimisation:
                 continue
         trial = Trial(param_values=param_values, U_value=U.tolist())
         return trial
+
+    def add_trial_from_data(self, key: PRNGKey, param_values: ParamValues) -> str:
+        U = sample_U_value(key=key, param_space=self._experiment.parameter_space, param_values=param_values)
+        trial = Trial(param_values=param_values, U_value=U)
+        self._experiment.trials[trial.trial_id] = trial
+        return trial.trial_id
 
     def create_new_trial(self, key: PRNGKey, random_explore: bool = False, beta: float = 0.5) -> str:
 
