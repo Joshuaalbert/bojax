@@ -7,7 +7,7 @@ install_requires = [
     'jax',
     'jaxlib',
     'tensorflow_probability',
-    'jaxns==2.4.3',
+    'jaxns==2.4.4',
     'pydantic',
     'chex>=0.0.8',
     'mctx',
@@ -20,7 +20,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='bojaxns',
-      version='1.1.0',
+      version='1.1.1',
       description='Bayesian Optimisation with JAXNS',
       long_description=long_description,
       long_description_content_type="text/markdown",

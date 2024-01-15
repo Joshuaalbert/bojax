@@ -1,7 +1,7 @@
 jax
 jaxlib
 tensorflow_probability
-jaxns==2.4.3
+jaxns==2.4.4
 pydantic
 chex>=0.0.8
 mctx
