@@ -4,7 +4,7 @@ import numpy as np
 import pylab as plt
 from jax import random, numpy as jnp
 from jax._src.random import PRNGKey
-from jaxns.prior import parse_prior, PriorModelType, transform
+from jaxns.framework.ops import parse_prior, transform
 from matplotlib import dates as mdates
 
 from bojaxns.common import FloatValue, IntValue, ParamValues
@@ -59,7 +59,7 @@ class BayesianOptimisation:
         return cls(experiment=experiment)
 
     @staticmethod
-    def _create_trial(experiment: OptimisationExperiment, U: jnp.ndarray, prior_model: PriorModelType) -> Trial:
+    def _create_trial(experiment: OptimisationExperiment, U: jnp.ndarray, prior_model) -> Trial:
         prior_sample = transform(U=U, prior_model=prior_model)
         param_values = {}
         for param in experiment.parameter_space.parameters:

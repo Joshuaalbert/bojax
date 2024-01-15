@@ -4,8 +4,7 @@ from typing import NamedTuple, Dict
 import chex
 from jax import numpy as jnp, tree_map, vmap
 from jax.random import PRNGKey
-from jaxns import resample
-from jaxns.prior import PriorModelType
+from jaxns import resample, PriorModelType
 
 
 class AbstractAcquisition:
