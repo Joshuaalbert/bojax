@@ -58,4 +58,5 @@ pip install .
 
 # Change Log
 
+15 Jan, 2024 -- Bojaxns 1.1.0/1 released. Bumped to jaxns 2.4.3/4.
 20 July, 2023 -- Bojaxns 1.0.0 released
