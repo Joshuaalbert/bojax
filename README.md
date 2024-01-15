@@ -21,7 +21,7 @@ Bojaxns is:
 
 # Documentation
 
-For examples, check out the [documentation](https://bojax.readthedocs.io/) (still in progress).
+For examples, check out the [documentation](https://bojaxns.readthedocs.io/) (still in progress).
 
 # Install
 
