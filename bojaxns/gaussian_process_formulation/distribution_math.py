@@ -4,8 +4,7 @@ from typing import NamedTuple, List, Type
 from jax import numpy as jnp, tree_map
 from jax._src.scipy.linalg import solve_triangular
 from jaxns import PriorModelGen, Prior, Categorical
-from jaxns.prior import PriorModelType
-from jaxns.types import float_type
+from jaxns.internals.types import float_type
 from tensorflow_probability.substrates import jax as tfp
 
 from bojaxns.base import _assert_rank, _assert_same_leading_dim, ConditionalPredictive, ConditionalPredictiveFactory, \
@@ -58,8 +57,10 @@ class GaussianProcessData(NamedTuple):
     Y_var: jnp.ndarray
     sample_size: jnp.ndarray
 
+
 class NotEnoughData(Exception):
     pass
+
 
 def _ensure_gaussian_process_data(data: GaussianProcessData) -> GaussianProcessData:
     data = tree_map(lambda x: jnp.asarray(x, float_type), data)
@@ -179,7 +180,7 @@ class GaussianProcessConditionalPredictiveFactory(ConditionalPredictiveFactory):
     def ndims(self):
         return self._data.U.shape[-1]
 
-    def build_prior_model(self) -> PriorModelType:
+    def build_prior_model(self):
         amplitude_scale = 2 * jnp.std(self._data.Y)
         length_scale_scale = jnp.max(self._data.U, axis=0) - jnp.min(self._data.U, axis=0)
         variance_scale = jnp.std(self._data.Y)

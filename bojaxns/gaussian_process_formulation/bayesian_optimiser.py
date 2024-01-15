@@ -1,13 +1,13 @@
 import os.path
 
+import jax
 import numpy as np
 import tensorflow_probability.substrates.jax as tfp
 from chex import PRNGKey
 from jax import random, numpy as jnp, vmap
 from jax._src.lax.control_flow import scan
-from jaxns import Model, TerminationCondition, NestedSamplerResults, ApproximateNestedSampler, \
-    UniformSampler, UniDimSliceSampler
-from jaxns.types import float_type
+from jaxns import Model, DefaultNestedSampler
+from jaxns.internals.types import float_type, NestedSamplerResults
 
 from bojaxns.base import AbstractAcquisition, MarginalisedAcquisitionFunction, MarginalisationData
 from bojaxns.experiment import OptimisationExperiment
@@ -93,19 +93,13 @@ class BayesianOptimiser:
             log_likelihood=log_likelihood
         )
 
-        ns = ApproximateNestedSampler(
+        ns = DefaultNestedSampler(
             model=model,
-            num_live_points=model.U_ndims * 50,
-            num_parallel_samplers=1,
-            max_samples=1e5,
-            sampler_chain=[
-                UniformSampler(model=model, efficiency_threshold=0.1),
-                UniDimSliceSampler(model=model, num_slices=model.U_ndims * 5, midpoint_shrink=True,
-                                   efficiency_threshold=None, perfect=True)
-            ]
+            parameter_estimation=True,
+            max_samples=1e5
         )
-        termination_reason, state = ns(key=key, term_cond=TerminationCondition(live_evidence_frac=1e-4))
-        results = ns.to_results(state, termination_reason)
+        termination_reason, state = jax.jit(ns)(key=key)
+        results = ns.to_results(termination_reason, state)
         ns.summary(results)
         ns.plot_diagnostics(results)
         ns.plot_cornerplot(results)

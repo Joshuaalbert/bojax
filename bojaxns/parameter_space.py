@@ -6,14 +6,12 @@ import tensorflow_probability.substrates.jax as tfp
 from chex import PRNGKey
 from jax import random, jit
 from jax._src.lax.control_flow import while_loop
+from jaxns import Categorical, Prior
+from jaxns.internals.types import float_type, int_type
 from pydantic import BaseModel, Field, validator, confloat
 
 from bojaxns.common import FloatValue, IntValue, ParamValues, UValue
 from bojaxns.utils import build_example
-from jaxns import Prior, PriorModelGen
-from jaxns.prior import PriorModelType
-from jaxns.special_priors import Categorical
-from jaxns.types import float_type, int_type
 
 tfpd = tfp.distributions
 
@@ -207,7 +205,7 @@ def translate_parameter(param: Parameter) -> Generator[Prior, jnp.ndarray, jnp.n
         raise ValueError(f"Invalid prior {prior}")
 
 
-def build_prior_model(parameter_space: ParameterSpace) -> PriorModelType:
+def build_prior_model(parameter_space: ParameterSpace):
     """
     Constructs a prior model given the parameter space.
 
@@ -218,7 +216,7 @@ def build_prior_model(parameter_space: ParameterSpace) -> PriorModelType:
 
     """
 
-    def prior_model() -> PriorModelGen:
+    def prior_model():
         param_values = []
         for parameter in parameter_space.parameters:
             x = yield from translate_parameter(param=parameter)
